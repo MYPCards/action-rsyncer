@@ -1,6 +1,6 @@
-FROM alpine:3.18
+FROM alpine:3.20
 
-LABEL version="3.0.1"
+LABEL version="3.0.2"
 LABEL maintainer="Pendect Tech Team <tech@pendect.com>" \
       org.label-schema.vendor="Pendect GmbH" \
       com.github.actions.name="RSyncer Action" \
@@ -8,7 +8,8 @@ LABEL maintainer="Pendect Tech Team <tech@pendect.com>" \
       com.github.actions.icon="truck" \
       com.github.actions.color="blue"
 
-RUN apk add --no-cache --virtual .run-deps rsync=3.2.7-r4 openssh=9.3_p2-r1 && \
+RUN apk update && apk upgrade
+RUN apk add --no-cache --virtual .run-deps rsync openssh && \
     rm -rf /var/cache/apk/*
 
 COPY entrypoint.sh /entrypoint.sh
